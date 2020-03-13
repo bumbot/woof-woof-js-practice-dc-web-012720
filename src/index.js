@@ -29,6 +29,7 @@ function createDogBarElem(object) {
         event.preventDefault()        
         let dogDiv = document.getElementById('dog-info')
             dogDiv.innerText = ""
+            dogDiv.classList.add(`${status}`)
             dogDiv.dataset.id = object.id
 
         let dogImg = document.createElement('img')
@@ -45,7 +46,7 @@ function createDogBarElem(object) {
         dogDiv.append(dogImg, dogName, button)
 
         button.addEventListener("click", (event) => {
-
+            debugger
             if (status) {
                 object.isGoodDog = false
                 button.innerText = "Bad Dog!"
