@@ -10,12 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
     
 })
 
+/*
+        helper functions
+*/
 
 function createDogBarElem(object) {
     let name = object.name
     let status = object.isGoodDog
     let imageUrl = object.image
-    object.dataset.id = object.id
 
     let dogBar = document.getElementById('dog-bar');
     let span = document.createElement('span')
@@ -27,6 +29,7 @@ function createDogBarElem(object) {
         event.preventDefault()        
         let dogDiv = document.getElementById('dog-info')
             dogDiv.innerText = ""
+            dogDiv.dataset.id = object.id
 
         let dogImg = document.createElement('img')
             dogImg.src = imageUrl
@@ -42,22 +45,20 @@ function createDogBarElem(object) {
         dogDiv.append(dogImg, dogName, button)
 
         button.addEventListener("click", (event) => {
-            event.
 
             if (status) {
+                object.isGoodDog = false
                 button.innerText = "Bad Dog!"
             } else {
+                object.isGoodDog = true
                 button.innerText = "Good Dog!"
             }
-            debugger
 
-            fetch(`http://localhost:3000/pups/${}`, {
+            fetch(`http://localhost:3000/pups/${event.target.parentElement.dataset.id}`, {
                 method: "PATCH",
-                header: {"Content-Type": "application/json"},
-            body: {isGoodDog: /*we will add something soon */}
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(object)
             })
-
-            
 
         })
 
