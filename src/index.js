@@ -46,11 +46,14 @@ function createDogBarElem(object) {
         dogDiv.append(dogImg, dogName, button)
 
         button.addEventListener("click", (event) => {
-            debugger
-            if (status) {
+            status = event.target.parentElement.className
+            
+            if (status === 'true') {
+                event.target.parentElement.className = 'false'
                 object.isGoodDog = false
                 button.innerText = "Bad Dog!"
             } else {
+                event.target.parentElement.className = 'true'
                 object.isGoodDog = true
                 button.innerText = "Good Dog!"
             }
